@@ -42,7 +42,8 @@ def test_check_job_second_solution():
         assert_that(file_func(-5, "./file_arg/file_arg").get("message")).is_equal_to("")
         assert_that(file_func('A', "./file_arg/file_arg").get("message")).is_equal_to(
             "Check file path or lines_from_end value")
-        assert_that(file_func(None, "./file_arg/file_arg").get("message")).is_equal_to("Check file path or lines_from_end value")
+        assert_that(file_func(None, "./file_arg/file_arg").get("message")).is_equal_to(
+            "Check file path or lines_from_end value")
         assert_that(file_func(5, "./file_arg/file_arg1111").get("message")).is_equal_to(
             "Check file path or lines_from_end value")
         assert_that(file_func(5.0, "./file_arg/file_arg").get("message")).is_equal_to("".join("67\n78\n89\n90\n01"))
