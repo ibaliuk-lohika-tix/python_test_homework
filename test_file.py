@@ -10,7 +10,7 @@ def file_func(lines_from_end: int, file_path: str):
     :param file_path: Path to file we will use.
     :return:
     """
-    if os.path.isfile(file_path) and isinstance(lines_from_end, (int, float)):
+    if isinstance(lines_from_end, (int, float)) and os.path.isfile(file_path):
         with open(file_path, 'r') as file:
             return {"message":
                     ''.join(line for line in file.readlines()[-int(lines_from_end):]) if lines_from_end > 0 else ""}
@@ -30,23 +30,26 @@ def file_func(lines_from_end: int, file_path: str):
         (5, "./file_arg/file_arg1111", "Check file path or lines_from_end value"),
         (5.0, "./file_arg/file_arg", "".join("67\n78\n89\n90\n01")),
         (5, "", "Check file path or lines_from_end value"),
-        (91111, "./file_arg/file_arg", ''.join("12\n23\n34\n45\n56\n67\n78\n89\n90\n01"))
+        (91111, "./file_arg/file_arg", ''.join("12\n23\n34\n45\n56\n67\n78\n89\n90\n01")),
+        (None, None, "Check file path or lines_from_end value"),
+        ("", "", "Check file path or lines_from_end value")
         ])
 def test_check_job(lines_from_end, file_path, expected):
     assert_that(file_func(lines_from_end, file_path).get("message")).is_equal_to(expected)
 
+
 def test_check_job_second_solution():
+    error_message = "Check file path or lines_from_end value"
     with soft_assertions():
         assert_that(file_func(0, "./file_arg/file_arg").get("message")).is_equal_to("")
         assert_that(file_func(5, "./file_arg/file_arg").get("message")).is_equal_to("".join("67\n78\n89\n90\n01"))
         assert_that(file_func(-5, "./file_arg/file_arg").get("message")).is_equal_to("")
-        assert_that(file_func('A', "./file_arg/file_arg").get("message")).is_equal_to(
-            "Check file path or lines_from_end value")
-        assert_that(file_func(None, "./file_arg/file_arg").get("message")).is_equal_to(
-            "Check file path or lines_from_end value")
-        assert_that(file_func(5, "./file_arg/file_arg1111").get("message")).is_equal_to(
-            "Check file path or lines_from_end value")
+        assert_that(file_func('A', "./file_arg/file_arg").get("message")).is_equal_to(error_message)
+        assert_that(file_func(None, "./file_arg/file_arg").get("message")).is_equal_to(error_message)
+        assert_that(file_func(5, "./file_arg/file_arg1111").get("message")).is_equal_to(error_message)
         assert_that(file_func(5.0, "./file_arg/file_arg").get("message")).is_equal_to("".join("67\n78\n89\n90\n01"))
-        assert_that(file_func(5, "").get("message")).is_equal_to("Check file path or lines_from_end value")
+        assert_that(file_func(5, "").get("message")).is_equal_to(error_message)
         assert_that(file_func(91111, "./file_arg/file_arg").get("message")).is_equal_to(
             "".join("12\n23\n34\n45\n56\n67\n78\n89\n90\n01"))
+        assert_that(file_func("", "").get("message")).is_equal_to(error_message)
+        assert_that(file_func(None, None).get("message")).is_equal_to(error_message)
