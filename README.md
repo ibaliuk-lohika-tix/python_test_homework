@@ -22,7 +22,7 @@ test the previously written function/method
 ```
 
 # How to run tests
-#### Go to project directory and execute command:
+#### Go to tests directory("./tests/") and execute command:
 ```
 "py.test -v"
 ```
