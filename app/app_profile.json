@@ -1,0 +1,5 @@
+{
+  "file_path": "./file_arg/file_arg",
+  "error_message": "Check file path or lines_from_end value",
+  "result": "./file_arg/result"
+}
