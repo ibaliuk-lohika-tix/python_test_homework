@@ -5,7 +5,7 @@ import os
 class AppData:
     def __init__(self):
         self.app_path = os.path.abspath(os.path.dirname(__file__))
-        self.profile_path = f"{self.app_path}/app_profile.json"
+        self.profile_path = f"{self.app_path}\\app_profile.json"
         with open(self.profile_path, "r") as app_profile:
             data = json.load(app_profile)
             self.file_path = data.get('file_path')
@@ -25,11 +25,11 @@ class AppData:
         file_result_path = file_result_path if file_result_path else self.result
         file_path = file_path if file_path else self.file_path
         if isinstance(lines_from_end, (int, float)) and os.path.isfile(f"{self.app_path}/.{file_path}"):
-            with open(f"{self.app_path}/.{file_path}", "r") as file:
+            with open(f"{self.app_path}\\.{file_path}", "r") as file:
                 lines = "".join(line for line in file.readlines()[-int(lines_from_end):]) if lines_from_end > 0 else ""
         else:
             lines = self.error_message
-        with open(f"{self.app_path}/.{file_result_path}", "w+") as file_result:
+        with open(f"{self.app_path}\\.{file_result_path}", "w+") as file_result:
             print(lines, file=file_result)
             return lines
 
@@ -42,7 +42,7 @@ class AppData:
         """
         file_path = file_path if file_path else self.file_path
         if isinstance(lines_from_end, (int, float)) and os.path.isfile(f"{self.app_path}/.{file_path}"):
-            with open(f"{self.app_path}/.{file_path}", 'r') as file:
+            with open(f"{self.app_path}\\.{file_path}", 'r') as file:
                 return {"message":
                         ''.join(line for line in file.readlines()[-int(lines_from_end):]) if lines_from_end > 0 else ""}
         else:
