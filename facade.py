@@ -1,6 +1,7 @@
 import json
 from models.models import Context, ContextProfile
-import os, sys
+import os
+import pytest
 
 
 class Facade:
