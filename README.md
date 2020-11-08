@@ -14,17 +14,26 @@ in the correct order.
 Please create test cases which will
 test the previously written function/method
 ```
+#### Install and activate virtual environment:
+```
+py -m pip install --user virtualenv
+```
+Go to project directory and execute
+```
+py -m venv env
 
+.\env\Scripts\activate
+```
 
 #### To install packages which are required go to project directory and execute command:
 ```
-"pip install req"
+pip install -r requirements.txt
 ```
 
 # How to run tests
 #### Go to tests directory("./tests/") and execute command:
 ```
-"py.test -v"
+py.test -v
 ```
 
 # How to set non-default variables
